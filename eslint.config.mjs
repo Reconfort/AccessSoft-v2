@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Next.js generated route types (stray copy of .next/types)
+    "types/**",
   ]),
 ]);
 

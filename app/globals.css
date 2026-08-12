@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ */
+/*  AccessSoft design tokens                                           */
+/*  Brand palette preserved from the current production site:          */
+/*  paper #F7F6F3 · ink #101014 · accent #2B2BE6 · muted #5F5F6B       */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  /* Semantic colors */
+  --color-paper: #f7f6f3;
+  --color-ink: #101014;
+  --color-ink-2: #17171d; /* raised dark surface */
+  --color-ink-3: #26262f; /* border on dark */
+  --color-muted: #5f5f6b;
+  --color-faint: #9a99a3;
+  --color-line: #e5e3dc;
+  --color-surface: #ffffff;
+  --color-accent: #2b2be6;
+  --color-accent-deep: #2121c2;
+  --color-accent-soft: #ececfd;
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+
+  /* Editorial type scale */
+  --text-display: clamp(2.7rem, 6.6vw, 5.9rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-h2: clamp(2rem, 4.2vw, 3.6rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h3: clamp(1.3rem, 2vw, 1.65rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+  --text-lead: clamp(1.05rem, 1.35vw, 1.3rem);
+  --text-lead--line-height: 1.6;
+  --text-stat: clamp(3.2rem, 6vw, 5.5rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+
+  /* Motion */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Dark sections carry their own focus contrast */
+[data-theme="dark"] :focus-visible {
+  outline-color: #b9b9ff;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Editorial utilities                                                */
+/* ------------------------------------------------------------------ */
+
+/* Mono eyebrow / label treatment used across every section */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Serif italic accent word inside display headlines (brand signature) */
+.accent-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Motion system — respects prefers-reduced-motion                    */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s var(--ease-soft),
+      transform 0.7s var(--ease-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
