@@ -94,7 +94,7 @@ export default function Header() {
             onClick={() => closeMenu(false)}
             className="shrink-0"
           >
-            <Wordmark />
+            <Wordmark priority />
           </a>
 
           {/* Desktop navigation */}

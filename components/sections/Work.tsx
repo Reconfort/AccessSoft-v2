@@ -11,7 +11,7 @@ import Button from "@/components/ui/Button";
  */
 export default function Work() {
   return (
-    <section id="work" className="scroll-mt-24">
+    <section id="work" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>

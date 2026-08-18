@@ -12,7 +12,7 @@ export default function Contact() {
   const { finalCta } = company;
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-line">
+    <section id="contact" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>Contact</SectionLabel>

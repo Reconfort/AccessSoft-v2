@@ -9,7 +9,7 @@ import ArrowUpRight from "@/components/ui/ArrowUpRight";
 /** News — three editorial cards. Static content, no CMS. */
 export default function Insights() {
   return (
-    <section id="insights" className="scroll-mt-24">
+    <section id="insights" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>News & insights</SectionLabel>

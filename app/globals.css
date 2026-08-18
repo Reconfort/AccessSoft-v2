@@ -96,6 +96,22 @@ body {
   outline-color: #b9b9ff;
 }
 
+/*
+  Form fields opt out of the global focus ring — they signal focus with
+  their own accent border instead (see ContactForm / Select).
+*/
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible,
+[aria-haspopup="listbox"]:focus,
+[aria-haspopup="listbox"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Editorial utilities                                                */
 /* ------------------------------------------------------------------ */

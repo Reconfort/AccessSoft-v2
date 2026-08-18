@@ -11,7 +11,7 @@ import ArrowUpRight from "@/components/ui/ArrowUpRight";
  */
 export default function Services() {
   return (
-    <section id="services" className="scroll-mt-24">
+    <section id="services" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>Areas of expertise</SectionLabel>

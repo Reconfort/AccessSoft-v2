@@ -11,7 +11,7 @@ import ArrowUpRight from "@/components/ui/ArrowUpRight";
  */
 export default function Industries() {
   return (
-    <section id="industries" className="scroll-mt-24 border-t border-line">
+    <section id="industries" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel supporting="Technology shaped around the realities of your business — its regulations, workflows, and customers.">

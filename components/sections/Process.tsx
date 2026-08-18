@@ -44,7 +44,7 @@ export default function Process() {
   }));
 
   return (
-    <section id="process" className="scroll-mt-24 bg-surface">
+    <section id="process" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel supporting="Five phases, each ending in something you can see, test, and sign off on — no chaos, no mystery, no disappearing after launch.">

@@ -31,7 +31,7 @@ export default function Testimonials() {
   const [featured, ...rest] = testimonials;
 
   return (
-    <section id="testimonials" className="scroll-mt-24 border-t border-line">
+    <section id="testimonials" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>What our partners say</SectionLabel>

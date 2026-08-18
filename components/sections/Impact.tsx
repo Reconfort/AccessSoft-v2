@@ -10,7 +10,7 @@ import StatNumber from "@/components/ui/StatNumber";
  */
 export default function Impact() {
   return (
-    <section id="impact" className="scroll-mt-24 border-y border-line">
+    <section id="impact" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>Our numbers</SectionLabel>

@@ -7,7 +7,7 @@ export default function WhoWeAre() {
   const { whoWeAre } = company;
 
   return (
-    <section id="who-we-are" className="scroll-mt-24 border-b border-line">
+    <section id="who-we-are" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel>Who we are</SectionLabel>

@@ -1,17 +1,32 @@
+import Image from "next/image";
+
 type WordmarkProps = {
   dark?: boolean;
   className?: string;
+  priority?: boolean;
 };
 
-/** AccessSoft wordmark — name plus the brand-accent full stop. */
-export default function Wordmark({ dark = false, className = "" }: WordmarkProps) {
+/**
+ * AccessSoft mark from public/Logo.png (blue on black).
+ * Sits on an ink plate so the baked-in background matches both
+ * the light header and the dark footer.
+ */
+export default function Wordmark({
+  dark = false,
+  className = "",
+  priority = false,
+}: WordmarkProps) {
   return (
-    <span
-      className={`text-xl font-semibold tracking-tight ${
-        dark ? "text-paper" : "text-ink"
-      } ${className}`}
-    >
-      AccessSoft<span className="text-accent">.</span>
+    <span className={`inline-flex ${className}`}>
+      <Image
+        src="/Logo.png"
+        alt="AccessSoft"
+        width={180}
+        height={167}
+        sizes="180px"
+        priority={priority}
+        className={`w-auto mt-4 ${dark ? "h-20" : "h-16"}`}
+      />
     </span>
   );
 }

@@ -6,7 +6,7 @@ import ArrowLink from "@/components/ui/ArrowLink";
 
 export default function Solutions() {
   return (
-    <section id="solutions" className="scroll-mt-24 border-t border-line bg-paper">
+    <section id="solutions" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel supporting="Services describe what we do — this is what changes in your business when we do it.">
