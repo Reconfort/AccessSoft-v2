@@ -1,15 +1,50 @@
+import Image from "next/image";
 import { processPhases } from "@/content/process";
 import Container from "@/components/layout/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Reveal from "@/components/ui/Reveal";
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 
 /**
- * How we work — five phases on a horizontal progression rail
- * (01 ─ 02 ─ 03 ─ 04 ─ 05); stacks vertically on smaller screens.
+ * How we work — five phases revealed on page scroll. The sticky panel
+ * tracks the active phase, showing its photograph and the deliverable
+ * the phase ends in.
  */
 export default function Process() {
+  const content = processPhases.map((phase, index) => ({
+    title: `${phase.number} — ${phase.title}`,
+    description: phase.description,
+    content: (
+      <div className="relative h-full w-full overflow-hidden">
+        <Image
+          src={phase.image}
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 0px, 45vw"
+          priority={index === 0}
+          className="object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,8,14,0.9)_0%,rgba(8,8,14,0.3)_55%,rgba(8,8,14,0.1)_100%)]"
+        />
+        <div className="absolute inset-0 flex flex-col justify-between p-8">
+          <span className="text-5xl font-semibold tracking-tight text-white">
+            {phase.number}
+          </span>
+          <div>
+            <p className="label-mono text-white/60">Ends in</p>
+            <p className="mt-2 text-xl leading-snug font-medium text-white">
+              {phase.outcome}
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  }));
+
   return (
-    <section id="process" className="scroll-mt-24 bg-paper">
+    <section id="process" className="scroll-mt-24 bg-surface">
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionLabel supporting="Five phases, each ending in something you can see, test, and sign off on — no chaos, no mystery, no disappearing after launch.">
@@ -17,39 +52,7 @@ export default function Process() {
           </SectionLabel>
         </Reveal>
 
-        <ol className="mt-14 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
-          {processPhases.map((phase, index) => (
-            <li key={phase.number} className="relative lg:px-4 lg:first:pl-0 lg:last:pr-0">
-              <Reveal delay={Math.min(index, 4) * 80}>
-                {/* Rail node */}
-                <div className="flex items-center gap-4">
-                  <span
-                    aria-hidden="true"
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-accent bg-surface font-mono text-xs font-semibold text-accent"
-                  >
-                    {phase.number}
-                  </span>
-                  {index < processPhases.length - 1 && (
-                    <span
-                      aria-hidden="true"
-                      className="hidden h-px flex-1 bg-line lg:block"
-                    />
-                  )}
-                </div>
-
-                <h3 className="mt-5 text-xl font-semibold tracking-tight text-ink">
-                  {phase.title}
-                </h3>
-                <p className="mt-2.5 pr-2 text-sm leading-relaxed text-muted">
-                  {phase.description}
-                </p>
-                <p className="mt-3.5 pr-2 font-mono text-xs leading-relaxed text-accent">
-                  → {phase.outcome}
-                </p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+        <StickyScroll content={content} className="mt-16" />
       </Container>
     </section>
   );

@@ -23,21 +23,6 @@ export default function SectionLabel({
         dark ? "text-paper" : "text-ink"
       }`}
     >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 10 32"
-        className={`h-[0.72em] w-auto shrink-0 ${
-          dark ? "text-[#8f8fff]" : "text-accent"
-        }`}
-      >
-        <path
-          d="M8.2 1.2 L1.8 30.8"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.4"
-          strokeLinecap="square"
-        />
-      </svg>
       {children}
     </h2>
   );

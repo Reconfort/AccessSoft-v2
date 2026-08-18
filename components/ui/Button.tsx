@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 import ArrowUpRight from "./ArrowUpRight";
 
 type ButtonProps = {
@@ -8,6 +8,7 @@ type ButtonProps = {
   size?: "md" | "lg";
   showArrow?: boolean;
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 const base =
@@ -38,9 +39,14 @@ export default function Button({
   size = "md",
   showArrow = true,
   className = "",
+  onClick,
 }: ButtonProps) {
   return (
-    <a href={href} className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}>
+    <a
+      href={href}
+      onClick={onClick}
+      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+    >
       <span>{children}</span>
       {showArrow && (
         <ArrowUpRight className="size-4 transition-transform duration-300 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5" />

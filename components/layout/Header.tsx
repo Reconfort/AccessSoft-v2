@@ -29,19 +29,50 @@ export default function Header() {
     if (refocus) menuButtonRef.current?.focus();
   }, []);
 
-  /* Scroll lock + Escape + initial focus while the mobile menu is open. */
+  /* Scroll lock, Escape, initial focus, and focus trap while open. */
   useEffect(() => {
     if (!menuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    panelRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+
+    const panel = panelRef.current;
+    const focusables = () =>
+      Array.from(
+        panel?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ??
+          [],
+      );
+
+    focusables()[0]?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeMenu();
-    };
-    document.addEventListener("keydown", onKeyDown);
+      if (event.key === "Escape") {
+        closeMenu();
+        return;
+      }
 
+      if (event.key !== "Tab") return;
+
+      // Keep Tab cycling inside the panel (plus the toggle button).
+      const items = [...focusables(), menuButtonRef.current].filter(
+        Boolean,
+      ) as HTMLElement[];
+      if (items.length === 0) return;
+
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
@@ -49,13 +80,14 @@ export default function Header() {
   }, [menuOpen, closeMenu]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-surface/95 backdrop-blur-md transition-shadow duration-300 ${
-        scrolled && !menuOpen ? "shadow-[0_1px_12px_rgba(16,16,20,0.06)]" : ""
-      }`}
-    >
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-surface/95 backdrop-blur-md transition-shadow duration-300 ${
+          menuOpen ? "border-transparent" : "border-line"
+        } ${scrolled && !menuOpen ? "shadow-[0_1px_12px_rgba(16,16,20,0.06)]" : ""}`}
+      >
       <Container>
-        <div className="flex h-18 items-center justify-between gap-6">
+        <div className="relative z-50 flex h-18 items-center justify-between gap-6">
           <a
             href="#top"
             aria-label="AccessSoft — back to top"
@@ -85,52 +117,67 @@ export default function Header() {
             <Button href="#contact">Start a project</Button>
           </div>
 
-          {/* Mobile menu toggle */}
+          {/* Hamburger toggle — morphs into a close (×) when open */}
           <button
             ref={menuButtonRef}
             type="button"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
-            className="relative flex size-11 items-center justify-center rounded-full border border-ink/15 lg:hidden"
+            className="relative flex size-11 cursor-pointer items-center justify-center border border-ink/15 transition-colors duration-300 hover:border-ink/40 lg:hidden"
           >
             <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
             <span
               aria-hidden="true"
-              className={`absolute h-px w-4.5 bg-ink transition-transform duration-300 ${
+              className={`absolute h-px w-4.5 bg-ink transition-transform duration-300 ease-[var(--ease-soft)] ${
                 menuOpen ? "rotate-45" : "-translate-y-[3.5px]"
               }`}
             />
             <span
               aria-hidden="true"
-              className={`absolute h-px w-4.5 bg-ink transition-transform duration-300 ${
+              className={`absolute h-px w-4.5 bg-ink transition-[transform,opacity] duration-300 ease-[var(--ease-soft)] ${
                 menuOpen ? "-rotate-45" : "translate-y-[3.5px]"
               }`}
             />
           </button>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </header>
 
-      {/* Mobile navigation panel */}
+      {/*
+        Rendered as a sibling of <header>, not inside it: the header's
+        backdrop-blur creates a containing block for fixed-position
+        descendants, which would collapse this panel to the header's height.
+      */}
       <div
         id="mobile-nav"
         ref={panelRef}
-        hidden={!menuOpen}
-        className="fixed inset-x-0 top-18 bottom-0 z-40 overflow-y-auto bg-surface lg:hidden"
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+        className={`fixed inset-x-0 top-18 bottom-0 z-40 overflow-y-auto overscroll-contain bg-surface transition-[opacity,transform] duration-400 ease-[var(--ease-soft)] motion-reduce:transition-none lg:hidden ${
+          menuOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-3 opacity-0"
+        }`}
       >
-        <Container className="flex min-h-full flex-col justify-between pt-10 pb-12">
+        <Container className="flex min-h-full flex-col justify-between pt-8 pb-12">
           <nav aria-label="Mobile">
-            <ul className="space-y-2 border-t border-line">
+            <ul className="border-t border-line">
               {mainNav.map((item, index) => (
                 <li key={item.href} className="border-b border-line">
                   <a
                     href={item.href}
                     onClick={() => closeMenu(false)}
-                    className="group flex items-baseline gap-4 py-4 text-3xl font-semibold tracking-tight text-ink"
+                    style={{
+                      transitionDelay: menuOpen ? `${100 + index * 55}ms` : "0ms",
+                    }}
+                    className={`group flex items-baseline gap-4 py-5 text-3xl font-semibold text-ink transition-[opacity,transform] duration-500 ease-[var(--ease-soft)] motion-reduce:transition-none ${
+                      menuOpen
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-2 opacity-0"
+                    }`}
                   >
-                    <span className="label-mono text-accent">
-                      0{index + 1}
-                    </span>
+                    <span className="label-mono text-accent">0{index + 1}</span>
                     <span className="transition-colors duration-300 group-hover:text-accent">
                       {item.label}
                     </span>
@@ -140,8 +187,20 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-6">
-            <Button href="#contact" size="lg" className="w-full">
+          <div
+            style={{
+              transitionDelay: menuOpen ? `${100 + mainNav.length * 55}ms` : "0ms",
+            }}
+            className={`mt-12 space-y-6 transition-[opacity,transform] duration-500 ease-[var(--ease-soft)] motion-reduce:transition-none ${
+              menuOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+            }`}
+          >
+            <Button
+              href="#contact"
+              size="lg"
+              className="w-full"
+              onClick={() => closeMenu(false)}
+            >
               Start a project
             </Button>
             <p className="label-mono text-muted">
@@ -150,6 +209,6 @@ export default function Header() {
           </div>
         </Container>
       </div>
-    </header>
+    </>
   );
 }

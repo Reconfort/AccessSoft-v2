@@ -40,7 +40,7 @@
   --text-h3--letter-spacing: -0.01em;
   --text-lead: clamp(1.05rem, 1.35vw, 1.3rem);
   --text-lead--line-height: 1.6;
-  --text-stat: clamp(3.2rem, 6vw, 5.5rem);
+  --text-stat: clamp(2.4rem, 6vw, 5.5rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.03em;
 
@@ -105,8 +105,8 @@ body {
   font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  
+   
 }
 
 /* Accent word inside display headlines (brand signature) */

@@ -16,7 +16,7 @@ export default function Impact() {
           <SectionLabel>Our numbers</SectionLabel>
         </Reveal>
 
-        <dl className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 sm:gap-x-8 lg:grid-cols-4">
           {statistics.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 100}>
               <div className="flex flex-col-reverse">

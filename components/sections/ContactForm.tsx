@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { company } from "@/content/company";
 import ArrowUpRight from "@/components/ui/ArrowUpRight";
+import Select from "@/components/ui/Select";
 
 const projectTypes = [
   "New product",
@@ -98,19 +99,13 @@ export default function ContactForm() {
           <label htmlFor="contact-type" className="label-mono mb-2.5 block text-muted">
             Project type *
           </label>
-          <select
+          <Select
             id="contact-type"
             name="projectType"
             required
+            options={projectTypes}
             defaultValue={projectTypes[0]}
-            className={`${fieldClasses} appearance-none bg-[url('data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2212%22%20height=%228%22%20viewBox=%220%200%2012%208%22%3E%3Cpath%20d=%22M1%201.5L6%206.5L11%201.5%22%20stroke=%22%235f5f6b%22%20stroke-width=%221.5%22%20fill=%22none%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E')] bg-[position:right_1rem_center] bg-no-repeat pr-10`}
-          >
-            {projectTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          />
         </div>
       </div>
 
