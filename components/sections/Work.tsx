@@ -1,13 +1,13 @@
+import Image from "next/image";
 import { projects } from "@/content/projects";
 import Container from "@/components/layout/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
-import CaseVisual from "@/components/visuals/CaseVisual";
 
 /**
- * Success stories — large product showcase tiles: framed product UI
- * on a soft field, big client name beneath, verified outcome line.
+ * Success stories — photographic case-study tiles, big client name
+ * beneath, verified outcome line.
  */
 export default function Work() {
   return (
@@ -31,10 +31,13 @@ export default function Work() {
             >
               <article className="group">
                 <a href="#contact" aria-label={`${project.client} case study — discuss a project like this`} className="block">
-                  <div className="overflow-hidden rounded-lg bg-paper p-5 transition-colors duration-300 group-hover:bg-accent-soft/50 sm:p-7">
-                    <CaseVisual
-                      visual={project.visual}
-                      className="aspect-[16/11] w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.02]"
+                  <div className="relative aspect-[16/11] overflow-hidden rounded-lg">
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
                     />
                   </div>
 

@@ -9,15 +9,12 @@ import Work from "@/components/sections/Work";
 import Impact from "@/components/sections/Impact";
 import Testimonials from "@/components/sections/Testimonials";
 import Process from "@/components/sections/Process";
-import Engineering from "@/components/sections/Engineering";
-import About from "@/components/sections/About";
 import Insights from "@/components/sections/Insights";
-import Clients from "@/components/sections/Clients";
 import Contact from "@/components/sections/Contact";
 
 /**
  * Homepage narrative: identity → capability → relevance → proof →
- * trust → process → company → conversion.
+ * trust → process → conversion.
  */
 export default function Home() {
   return (
@@ -39,10 +36,7 @@ export default function Home() {
         <Impact />
         <Testimonials />
         <Process />
-        <Engineering />
-        <About />
         <Insights />
-        <Clients />
         <Contact />
       </main>
       <Footer />

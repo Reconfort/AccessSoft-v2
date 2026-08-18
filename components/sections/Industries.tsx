@@ -1,29 +1,23 @@
+import Image from "next/image";
 import { industries } from "@/content/industries";
 import Container from "@/components/layout/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Reveal from "@/components/ui/Reveal";
 import ArrowUpRight from "@/components/ui/ArrowUpRight";
-import IndustryVisual from "@/components/visuals/IndustryVisual";
 
 /**
- * Industries — a row of full-height visual columns that expand on
+ * Industries — a row of full-height photographic columns that expand on
  * hover/focus to reveal their description. Stacks into rows on mobile.
  */
 export default function Industries() {
   return (
     <section id="industries" className="scroll-mt-24 border-t border-line">
       <Container className="py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <SectionLabel>Industries</SectionLabel>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="max-w-md text-[15px] text-muted">
-              Technology shaped around the realities of your business —
-              its regulations, workflows, and customers.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <SectionLabel supporting="Technology shaped around the realities of your business — its regulations, workflows, and customers.">
+            Industries
+          </SectionLabel>
+        </Reveal>
 
         <Reveal delay={150}>
           <ul className="mt-12 flex flex-col gap-3 lg:h-[34rem] lg:flex-row">
@@ -37,14 +31,16 @@ export default function Industries() {
                   aria-label={`${industry.name} — ${industry.description}`}
                   className="absolute inset-0 flex flex-col justify-end"
                 >
-                  <IndustryVisual
-                    visual={industry.visual}
-                    dark
-                    className="absolute inset-0 h-full w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+                  <Image
+                    src={industry.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
                   />
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,16,20,0.88)_0%,rgba(16,16,20,0.2)_50%,transparent_75%)]"
+                    className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,8,14,0.75)_0%,rgba(8,8,14,0.2)_45%,rgba(8,8,14,0.08)_100%)]"
                   />
                   <div className="relative p-6">
                     <h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">

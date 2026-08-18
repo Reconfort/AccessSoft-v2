@@ -1,2 +1,2 @@
-/** Hero — full-viewport rotating slider (client component). */
+/** Hero — full-viewport peek carousel (client component). */
 export { default } from "./HeroSlider";

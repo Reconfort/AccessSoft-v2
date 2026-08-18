@@ -1,10 +1,10 @@
+import Image from "next/image";
 import { insights } from "@/content/insights";
 import { company } from "@/content/company";
 import Container from "@/components/layout/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Reveal from "@/components/ui/Reveal";
 import ArrowUpRight from "@/components/ui/ArrowUpRight";
-import InsightVisual from "@/components/visuals/InsightVisual";
 
 /** News — three editorial cards. Static content, no CMS. */
 export default function Insights() {
@@ -12,7 +12,7 @@ export default function Insights() {
     <section id="insights" className="scroll-mt-24">
       <Container className="py-20 md:py-28">
         <Reveal>
-          <SectionLabel>News &amp; insights</SectionLabel>
+          <SectionLabel>News & insights</SectionLabel>
         </Reveal>
 
         <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -26,10 +26,13 @@ export default function Insights() {
                   aria-label={`${insight.title} — request the article by email`}
                   className="flex h-full flex-col"
                 >
-                  <div className="overflow-hidden rounded-lg border border-line">
-                    <InsightVisual
-                      visual={insight.visual}
-                      className="h-44 w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+                    <Image
+                      src={insight.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
                     />
                   </div>
                   <p className="label-mono mt-5 flex flex-wrap gap-x-4 gap-y-1 text-muted">

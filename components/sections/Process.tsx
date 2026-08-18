@@ -11,17 +11,11 @@ export default function Process() {
   return (
     <section id="process" className="scroll-mt-24 bg-paper">
       <Container className="py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <SectionLabel>How we work</SectionLabel>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="max-w-md text-[15px] text-muted">
-              Five phases, each ending in something you can see, test, and
-              sign off on — no chaos, no mystery, no disappearing after launch.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <SectionLabel supporting="Five phases, each ending in something you can see, test, and sign off on — no chaos, no mystery, no disappearing after launch.">
+            How we work
+          </SectionLabel>
+        </Reveal>
 
         <ol className="mt-14 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-0">
           {processPhases.map((phase, index) => (

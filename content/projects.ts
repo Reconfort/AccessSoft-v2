@@ -1,3 +1,5 @@
+import { unsplash } from "./photos";
+
 export type ProjectMetric = {
   value: string;
   label: string;
@@ -12,8 +14,7 @@ export type Project = {
   challenge: string;
   solution: string;
   metrics: ProjectMetric[];
-  /** Key for the product-UI composition rendered for this case study. */
-  visual: "imara" | "tera" | "volt";
+  image: string;
   featured?: boolean;
 };
 
@@ -37,7 +38,7 @@ export const projects: Project[] = [
       { value: "99.98%", label: "pipeline uptime" },
       { value: "60%", label: "fewer manual corrections" },
     ],
-    visual: "imara",
+    image: unsplash("photo-1551288049-bebda4e38f71"),
     featured: true,
   },
   {
@@ -55,7 +56,7 @@ export const projects: Project[] = [
       { value: "112s", label: "median booking time" },
       { value: "4.8/5", label: "patient satisfaction" },
     ],
-    visual: "tera",
+    image: unsplash("photo-1576091160550-2173dba999ef"),
   },
   {
     id: "volt-logistics",
@@ -72,6 +73,6 @@ export const projects: Project[] = [
       { value: "200+", label: "vehicles tracked live" },
       { value: "14hrs", label: "dispatch time saved weekly" },
     ],
-    visual: "volt",
+    image: unsplash("photo-1601584115197-04ecc0da31d7"),
   },
 ];

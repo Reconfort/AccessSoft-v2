@@ -8,17 +8,11 @@ export default function Solutions() {
   return (
     <section id="solutions" className="scroll-mt-24 border-t border-line bg-paper">
       <Container className="py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <SectionLabel>Solutions</SectionLabel>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="max-w-md text-[15px] text-muted">
-              Services describe what we do — this is what changes in your
-              business when we do it.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <SectionLabel supporting="Services describe what we do — this is what changes in your business when we do it.">
+            Solutions
+          </SectionLabel>
+        </Reveal>
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
           {solutions.map((solution, index) => (

@@ -36,12 +36,3 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-/**
- * Client wordmarks for the trust strip. Rendered as monochrome text
- * until real logo assets are supplied — add `logoSrc` per client then.
- */
-export const clients = [
-  { name: "Imara Finance" },
-  { name: "Tera Health" },
-  { name: "Volt Logistics" },
-] as const;

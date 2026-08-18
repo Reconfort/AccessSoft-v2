@@ -20,14 +20,17 @@
   --color-accent-deep: #2121c2;
   --color-accent-soft: #ececfd;
 
-  /* Typography */
+  /* Typography — one typeface across the entire site */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
-  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Editorial type scale */
-  --text-display: clamp(2.7rem, 6.6vw, 5.9rem);
-  --text-display--line-height: 1.02;
+  --text-hero: clamp(2rem, 4.4vw, 3.9rem);
+  --text-hero--line-height: 1.06;
+  --text-hero--letter-spacing: -0.03em;
+  --text-display: clamp(2.4rem, 5.4vw, 4.8rem);
+  --text-display--line-height: 1.04;
   --text-display--letter-spacing: -0.03em;
   --text-h2: clamp(2rem, 4.2vw, 3.6rem);
   --text-h2--line-height: 1.08;
@@ -40,6 +43,16 @@
   --text-stat: clamp(3.2rem, 6vw, 5.5rem);
   --text-stat--line-height: 1;
   --text-stat--letter-spacing: -0.03em;
+
+  /* Radii — the design system is fully squared off */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
 
   /* Motion */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -55,6 +68,17 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/*
+  No border radius anywhere in the project — squared corners are part of
+  the visual identity. This also neutralises `rounded-full` and any
+  arbitrary radius values, which are not driven by the theme tokens above.
+*/
+*,
+::before,
+::after {
+  border-radius: 0 !important;
 }
 
 ::selection {
@@ -76,20 +100,21 @@ body {
 /*  Editorial utilities                                                */
 /* ------------------------------------------------------------------ */
 
-/* Mono eyebrow / label treatment used across every section */
+/* Eyebrow / label treatment used across every section */
 .label-mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-/* Serif italic accent word inside display headlines (brand signature) */
+/* Accent word inside display headlines (brand signature) */
 .accent-word {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: inherit;
 }
 
 /* ------------------------------------------------------------------ */

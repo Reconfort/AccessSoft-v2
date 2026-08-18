@@ -6,6 +6,9 @@ export const company = {
   email: "hello@accesssoft.rw",
   hero: {
     eyebrow: "Digital product & technology partner — Kigali, Rwanda",
+    headlineBefore: "We design",
+    flipWords: ["products", "platforms", "systems", "experiences"],
+    headlineAfter: "that ambitious businesses keep.",
     /** Rotating hero statements; the first carries the page H1. */
     slides: [
       {
@@ -13,24 +16,28 @@ export const company = {
         accent: "ambitious businesses.",
         supporting:
           "Software engineering, product design, and strategy — delivered with the craft of a studio and the rigor of an engineering team.",
+        image: "/hero/hero-slide-product.jpg",
       },
       {
         statement: "We drive",
         accent: "digital transformation.",
         supporting:
           "Outdated processes and platforms modernized — without stopping the business to do it.",
+        image: "/hero/hero-slide-transform.jpg",
       },
       {
         statement: "We automate the work that slows",
         accent: "operations down.",
         supporting:
           "Pragmatic automation and applied AI, measured in hours saved every week.",
+        image: "/hero/hero-slide-automate.jpg",
       },
       {
         statement: "We build systems that",
         accent: "scale without drama.",
         supporting:
           "Typed, tested, observable software — engineered for the next five years, not just launch day.",
+        image: "/hero/hero-slide-scale.jpg",
       },
     ],
     primaryCta: { label: "Start a project", href: "#contact" },

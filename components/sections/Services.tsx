@@ -1,12 +1,12 @@
+import Image from "next/image";
 import { services } from "@/content/services";
 import Container from "@/components/layout/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Reveal from "@/components/ui/Reveal";
 import ArrowUpRight from "@/components/ui/ArrowUpRight";
-import ServiceVisual from "@/components/visuals/ServiceVisual";
 
 /**
- * Areas of expertise — full-bleed visual tiles with overlay titles
+ * Areas of expertise — full-bleed photographic tiles with overlay titles
  * and hover zoom, arranged in a large 2/3-column showcase grid.
  */
 export default function Services() {
@@ -25,11 +25,15 @@ export default function Services() {
                 aria-label={`${service.title} — start a conversation`}
                 className="group relative block overflow-hidden rounded-lg"
               >
-                <ServiceVisual
-                  id={service.id}
-                  className="aspect-[4/3] w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.05]"
-                />
-                {/* Legibility gradient */}
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={service.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.05]"
+                  />
+                </div>
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,16,20,0.85)_0%,rgba(16,16,20,0.25)_45%,transparent_70%)]"
@@ -39,7 +43,7 @@ export default function Services() {
                     <h3 className="text-2xl font-semibold tracking-tight text-white md:text-[1.7rem]">
                       {service.title}
                     </h3>
-                    <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/70 opacity-0 transition-opacity duration-500 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100 max-lg:opacity-100">
+                    <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/70 opacity-0 transition-opacity duration-500 max-lg:opacity-100 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
                       {service.description}
                     </p>
                   </div>

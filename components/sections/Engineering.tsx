@@ -11,17 +11,14 @@ export default function Engineering() {
       className="scroll-mt-24 bg-ink text-paper"
     >
       <Container className="py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <SectionLabel dark>Engineering standards</SectionLabel>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="max-w-md text-[15px] text-faint">
-              The discipline behind the products we build — applied to every
-              codebase, every week, on every engagement.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <SectionLabel
+            dark
+            supporting="The discipline behind the products we build — applied to every codebase, every week, on every engagement."
+          >
+            Engineering standards
+          </SectionLabel>
+        </Reveal>
 
         <div className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {engineeringStandards.map((standard, index) => (
